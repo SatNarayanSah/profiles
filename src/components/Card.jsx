@@ -8,10 +8,11 @@ import { PiPencil } from "react-icons/pi";
 import { ImBin } from "react-icons/im";
 import { FcLike } from "react-icons/fc";
 
-const Card = (props) => {
-  console.log(props);
-  const { id, email, imgurl, name, phone, url } = props.value;
-
+const Card = (value) => {
+  console.log(value);
+  const { id, email, imgurl, name, phone, url } = value.value;
+  const { handleShowModal } = value;
+  const { handleId } = value
   
   const [ isred, setIsred ] = useState(false);
 
@@ -29,7 +30,7 @@ const Card = (props) => {
     <div className="p-4">
       <div className="border-2 border-black h-fit w-[300px] ">
         <div className="bg-[#f5f5f5] flex  justify-center items-center">
-          <img className="w-1/2 h-1/2" src={imgurl} alt="image" />
+          <img className="h-[292px] w-[295px]" src={imgurl} alt="image" />
         </div>
         <div className="p-2 mt-4 mb-4">
           <p className="text-center font-bold text-2xl"> {name} </p>
@@ -61,7 +62,12 @@ const Card = (props) => {
           {isred ? <FcLike/> : <CiHeart/>}
             {/* {" "} */}
           </div>
-          <div className="border-r-2 p-4 w-1/3 flex justify-center">
+          <div 
+          onClick={() =>{
+            handleShowModal(true);
+            handleId(id);
+          }}
+          className="border-r-2 p-4 w-1/3 flex justify-center">
             {/* {" "} */}
             <PiPencil />
             {/* {" "} */}
